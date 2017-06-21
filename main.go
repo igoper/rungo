@@ -33,9 +33,9 @@ func main() {
 	infoLogger.SetPrefix("[INFO]:")
 	infoLogger.SetFlags(log.LstdFlags)
 
-	infoLogger.SetOutput(os.Stdout)
-	infoLogger.SetPrefix("[ERROR]:")
-	infoLogger.SetFlags(log.LstdFlags)
+	errLogger.SetOutput(os.Stdout)
+	errLogger.SetPrefix("[ERROR]:")
+	errLogger.SetFlags(log.LstdFlags)
 	//获取当前目录地址
 	_currPath, err := os.Getwd()
 	currPath = _currPath
