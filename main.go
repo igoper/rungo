@@ -1,29 +1,30 @@
 package main
 
 import (
-	"os"
-	"runtime"
 	"log"
-	"sync"
+	"os"
 	"os/exec"
 	"path/filepath"
+	"runtime"
+	"sync"
 	"time"
 )
 
 var (
-	lock sync.Mutex
-	currPath string
-	config Config
-	files []string        //监听的文件目录
-	cmd *exec.Cmd
-	exit chan bool
+	lock         sync.Mutex
+	currPath     string
+	config       Config
+	files        []string //监听的文件目录
+	cmd          *exec.Cmd
+	exit         chan bool
 	eventTime    = make(map[string]int64)
 	scheduleTime time.Time
-	infoLogger,errLogger log.Logger
+	infoLogger   log.Logger
+	errLogger    log.Logger
 )
 
 type Config struct {
-	AppName    string `json:"app_name"`
+	AppName    string   `json:"app_name"`
 	ListenExts []string `json:"listen_exts"`
 }
 
@@ -37,7 +38,7 @@ func main() {
 	infoLogger.SetFlags(log.LstdFlags)
 	//获取当前目录地址
 	_currPath, err := os.Getwd()
-	currPath = _currPath;
+	currPath = _currPath
 	if err != nil {
 		errLogger.Fatalln(err.Error())
 	}
@@ -51,6 +52,3 @@ func main() {
 	//运行执行内容
 	runApp()
 }
-
-
-
